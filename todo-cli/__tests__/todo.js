@@ -1,5 +1,5 @@
 const todoList=require("../todo");
-const {all, markAsComplete, add, overdue, dueToday, dueLater,toDisplayableList}=todoList();
+const { all, markAsComplete, add, overdue, dueToday, dueLater, toDisplayableList}=todoList();
 describe("Todolist Test Suite",()=>{
     beforeAll(()=>{
         add({
