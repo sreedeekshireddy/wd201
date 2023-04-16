@@ -20,8 +20,7 @@ const todoList = () => {
   }
   const dueLater=() =>{
     return all.filter(
-      (x) =>
-        x.dueDate === new Date(Date.now() + 86400000).toISOString().slice(0, 10)
+      (x) =>x.dueDate === new Date(Date.now() + 86400000).toISOString().slice(0, 10)
     );
   }
   const toDisplayableList = (list) => {
