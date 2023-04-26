@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 app.get("/todos", async (request, response) => {
-  //response.send("Hello world")
   console.log("Processing all Todos");
   try {
     const todos = await Todo.findAll();
