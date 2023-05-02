@@ -11,13 +11,11 @@
     "password": "Deekshi*02",
     "database": "wd-todo_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging":false
   },
   "production": {
-    "username": "postgres",
-    "password": "Deekshi*02",
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "use_env_variable":"DATABASE_URL",
+    "dialect":"postgres"
   }
 }
