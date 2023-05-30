@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use strict";
 const { Model, Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
@@ -7,67 +8,19 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
       });
     }
+
     static addTodo({ title, dueDate, userId }) {
       return this.create({
         title: title,
         dueDate: dueDate,
         completed: false,
-        userId,
-      });
-    }
-    static getTodos() {
-      return this.findAll();
-    }
-
-    static overdue(userId) {
-      return Todo.findAll({
-        where: {
-          dueDate: { [Op.lt]: new Date() },
-          userId,
-          completed: false,
-        },
-        order: [["dueDate", "ASC"]],
+        userId: userId,
       });
     }
 
-    static dueToday(userId) {
-      return this.findAll({
-        where: {
-          dueDate: { [Op.eq]: new Date() },
-          completed: false,
-          userId,
-        },
-        order: [["dueDate", "ASC"]],
-      });
-    }
-
-    static completed(userId) {
-      return Todo.findAll({
-        where: {
-          completed: true,
-          userId,
-        },
-        order: [["id", "ASC"]],
-      });
-    }
-
-    static dueLater(userId) {
-      return this.findAll({
-        where: {
-          dueDate: { [Op.gt]: new Date() },
-          userId,
-          completed: false,
-        },
-        order: [["dueDate", "ASC"]],
-      });
-    }
-
-    deleteTodo({ todo }) {
-      return this.destroy({
-        where: {
-          id: todo,
-        },
-      });
+    setCompletionStatus(completed) {
+      const setComplete = completed === true ? false : true;
+      return this.update({ completed: setComplete });
     }
 
     static async remove(id, userId) {
@@ -79,13 +32,55 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    markAsCompleted() {
-      return this.update({ completed: true });
+    static completedItems(userId) {
+      return this.findAll({
+        where: {
+          completed: true,
+          userId,
+        },
+      });
     }
 
-    setCompletionStatus(complete) {
-      const status = complete === true ? false : true;
-      return this.update({ completed: status });
+    static getTodoList() {
+      return this.findAll();
+    }
+    static async overdue(userId) {
+      return Todo.findAll({
+        where: {
+          dueDate: {
+            [Op.lt]: new Date(),
+          },
+          userId,
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
+    }
+
+    static async dueToday(userId) {
+      return Todo.findAll({
+        where: {
+          dueDate: {
+            [Op.eq]: new Date(),
+          },
+          userId,
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
+    }
+
+    static async dueLater(userId) {
+      return Todo.findAll({
+        where: {
+          dueDate: {
+            [Op.gt]: new Date(),
+          },
+          userId,
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
     }
   }
   Todo.init(
