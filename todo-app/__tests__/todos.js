@@ -191,10 +191,10 @@ describe("List the todo items Todo test suite", () => {
     let res = await agent.get("/signup");
     let csrfToken = extractCsrfToken(res);
     res = await agent.post("/users").send({
-      firstName: "Tippu",
-      lastName: "7",
-      email: "Tippu@7.com",
-      password: "Tippu7",
+      firstName: "Deekshi",
+      lastName: "sree",
+      email: "sreedeekshi@gmail.com",
+      password: "Deekshi*12",
       _csrf: csrfToken,
     });
 
@@ -234,10 +234,10 @@ describe("List the todo items Todo test suite", () => {
     let res = await agent.get("/signup");
     let csrfToken = extractCsrfToken(res);
     res = await agent.post("/users").send({
-      firstName: "Tippu",
-      lastName: "7",
-      email: "Tippu@7.com",
-      password: "Tippu7",
+      firstName: "Deekshi",
+      lastName: "sree",
+      email: "sreedeekshi@gmail.com",
+      password: "Deekshi*12",
       _csrf: csrfToken,
     });
 
